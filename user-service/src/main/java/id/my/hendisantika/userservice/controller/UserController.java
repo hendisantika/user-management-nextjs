@@ -1,8 +1,11 @@
 package id.my.hendisantika.userservice.controller;
 
+import id.my.hendisantika.userservice.dto.UserDTO;
 import id.my.hendisantika.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,4 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+
+    @PostMapping("/users")
+    public UserDTO saveUser(@RequestBody UserDTO user) {
+        return userService.saveUser(user);
+    }
 }
