@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : user-management-nextjs
@@ -27,5 +30,18 @@ public class UserService {
         BeanUtils.copyProperties(user, userEntity);
         userRepository.save(userEntity);
         return user;
+    }
+
+    public List<UserDTO> getAllUsers() {
+        List<User> userEntities = userRepository.findAll();
+        return userEntities
+                .stream()
+                .map(userEntity -> new UserDTO(
+                        userEntity.getId(),
+                        userEntity.getFirstName(),
+                        userEntity.getLastName(),
+                        userEntity.getEmailId()
+                ))
+                .collect(Collectors.toList());
     }
 }
