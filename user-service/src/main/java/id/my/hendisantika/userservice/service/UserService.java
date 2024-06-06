@@ -51,4 +51,10 @@ public class UserService {
         BeanUtils.copyProperties(userEntity, user);
         return user;
     }
+
+    public boolean deleteUser(Long id) {
+        User user = userRepository.findById(id).get();
+        userRepository.delete(user);
+        return true;
+    }
 }
