@@ -4,10 +4,13 @@ import id.my.hendisantika.userservice.dto.UserDTO;
 import id.my.hendisantika.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,5 +33,10 @@ public class UserController {
     @PostMapping("/users")
     public UserDTO saveUser(@RequestBody UserDTO user) {
         return userService.saveUser(user);
+    }
+
+    @GetMapping("/users")
+    public List<UserDTO> getAllUsers() {
+        return userService.getAllUsers();
     }
 }
