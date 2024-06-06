@@ -3,8 +3,10 @@ package id.my.hendisantika.userservice.controller;
 import id.my.hendisantika.userservice.dto.UserDTO;
 import id.my.hendisantika.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,4 +41,12 @@ public class UserController {
     public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable("id") Long id) {
+        UserDTO user = null;
+        user = userService.getUserById(id);
+        return ResponseEntity.ok(user);
+    }
+
 }
