@@ -44,4 +44,11 @@ public class UserService {
                 ))
                 .collect(Collectors.toList());
     }
+
+    public UserDTO getUserById(Long id) {
+        User userEntity = userRepository.findById(id).get();
+        UserDTO user = new UserDTO();
+        BeanUtils.copyProperties(userEntity, user);
+        return user;
+    }
 }
