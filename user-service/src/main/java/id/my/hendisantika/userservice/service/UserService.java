@@ -1,7 +1,10 @@
 package id.my.hendisantika.userservice.service;
 
+import id.my.hendisantika.userservice.dto.UserDTO;
+import id.my.hendisantika.userservice.entity.User;
 import id.my.hendisantika.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,4 +21,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+
+    public UserDTO saveUser(UserDTO user) {
+        User userEntity = new User();
+        BeanUtils.copyProperties(user, userEntity);
+        userRepository.save(userEntity);
+        return user;
+    }
 }
